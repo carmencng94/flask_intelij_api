@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alquileres | Sakila Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sakila Rentals</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/customers">Clientes</a>
+            <a href="/rentals">Alquileres</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="message" class="hidden"></div>
+
+        <section class="toolbar">
+            <div>
+                <input type="number" id="customerIdFilter" placeholder="Filtrar por ID de cliente...">
+                <button id="btn-filter-customer">Buscar</button>
+                <button id="btn-clear-filter" class="secondary">Limpiar</button>
+            </div>
+
+            <button id="btn-new-rental">Nuevo alquiler</button>
+        </section>
+
+        <section id="rental-form-section" class="hidden"></section>
+
+        <section>
+            <table id="rentals-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Inventory</th>
+                        <th>Staff</th>
+                        <th>Fecha alquiler</th>
+                        <th>Fecha devolución</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="/static/js/rentals.js"></script>
+</body>
+</html>

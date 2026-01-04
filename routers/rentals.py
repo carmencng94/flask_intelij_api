@@ -3,7 +3,6 @@ from db import get_connection
 
 router = APIRouter(tags=["Rentals"])
 
-# POST /api/v1/rentals
 @router.post("/rentals", status_code=201)
 def create_rental(body: dict):
     required = ["inventory_id", "customer_id", "staff_id"]
@@ -23,7 +22,6 @@ def create_rental(body: dict):
 
     return {"message": "Alquiler creado", "rental_id": new_id}
 
-# GET /api/v1/rentals/{id}
 @router.get("/rentals/{rental_id}")
 def get_rental(rental_id: int):
     conn = get_connection()
@@ -37,7 +35,6 @@ def get_rental(rental_id: int):
 
     return data
 
-# PUT /api/v1/rentals/{id}/return
 @router.put("/rentals/{rental_id}/return")
 def return_rental(rental_id: int):
     conn = get_connection()
@@ -46,11 +43,12 @@ def return_rental(rental_id: int):
             UPDATE rental SET return_date = NOW() WHERE rental_id=%s
         """, (rental_id,))
         conn.commit()
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Alquiler no encontrado")
     conn.close()
 
     return {"message": "Alquiler devuelto"}
 
-# GET /api/v1/customers/{id}/rentals
 @router.get("/customers/{customer_id}/rentals")
 def rentals_by_customer(customer_id: int):
     conn = get_connection()
@@ -63,12 +61,11 @@ def rentals_by_customer(customer_id: int):
 
     return data
 
-# GET /api/v1/rentals
 @router.get("/rentals")
-def get_rentals():
+def get_rentals(limit: int = 100, offset: int = 0):
     conn = get_connection()
     with conn.cursor() as cursor:
-        cursor.execute("SELECT * FROM rental LIMIT 100")
+        cursor.execute("SELECT * FROM rental LIMIT %s OFFSET %s", (limit, offset))
         data = cursor.fetchall()
     conn.close()
 
