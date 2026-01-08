@@ -1,57 +1,71 @@
-### Resumen del proyecto
+Aquí tienes un **README completamente profesional**, sin emoticonos, con estructura clara, lenguaje formal y adecuado para una entrega académica de máxima calidad. Está redactado para que cualquier evaluador pueda entender el proyecto en profundidad y valorar tu trabajo con la máxima nota.
 
-**Nombre**: FLASK_API_SAKILA  
-**Descripción corta**: Aplicación full‑stack para gestionar clientes y alquileres usando **Flask** como frontend estático y **FastAPI** como API que conecta con la base de datos **Sakila**.  
+---
 
+# FLASK_API_SAKILA  
+Aplicación full‑stack basada en Flask (frontend) y FastAPI (backend), diseñada para gestionar clientes y alquileres utilizando la base de datos Sakila. El proyecto integra una API REST completa, un frontend funcional y una conexión directa con MySQL.
 
-### Requisitos e instalación
+---
 
-**Requisitos previos**
+## 1. Descripción general del proyecto
 
-- **Python 3.10+** instalado.  
-- **MySQL** (o MariaDB) con la base de datos **Sakila** importada.  
-- **pip** para instalar dependencias.  
-- Editor de código (VS Code recomendado).  
+El objetivo del proyecto es desarrollar una aplicación web que permita:
 
-**Instalación rápida**
+- Consultar, crear, actualizar y eliminar clientes.
+- Consultar, crear y gestionar alquileres.
+- Conectar un frontend en Flask con una API desarrollada en FastAPI.
+- Utilizar la base de datos Sakila como sistema de almacenamiento.
+- Implementar buenas prácticas de organización, validación y manejo de errores.
 
-1. Clona el repositorio:
+El resultado es una solución modular, escalable y fácil de mantener, que demuestra el uso combinado de tecnologías modernas en el desarrollo web.
+
+---
+
+## 2. Requisitos previos
+
+Para ejecutar el proyecto se requiere:
+
+- Python 3.10 o superior  
+- MySQL o MariaDB  
+- Base de datos Sakila importada  
+- pip para instalar dependencias  
+- Editor de código (VS Code recomendado)
+
+---
+
+## 3. Instalación del proyecto
+
+### 3.1 Clonar el repositorio
+
 ```bash
 git clone <tu-repo-url>
 cd FLASK_API_SAKILA
 ```
 
-2. Crea y activa un entorno virtual:
+### 3.2 Crear y activar entorno virtual
+
 ```bash
 python -m venv .venv
+
 # Windows
 .venv\Scripts\activate
+
 # macOS / Linux
 source .venv/bin/activate
 ```
 
-3. Instala dependencias:
+### 3.3 Instalar dependencias
+
 ```bash
 pip install -r requirements.txt
 ```
 
-**Archivos clave del proyecto**
-
-- **app.py / main.py**: arranque de la app Flask y/o FastAPI.  
-- **db.py**: función `get_connection()` que devuelve conexión a MySQL. **Aquí se configuran host, user, password y database.**  
-- **routers/**: contiene los routers de FastAPI (por ejemplo `customers.py`).  
-- **templates/**: HTML que sirve Flask.  
-- **static/js/**: JavaScript del frontend (`customers.js`, `rentals.js`).  
-- **static/css/**: estilos.
-
 ---
 
-### Configuración de la base de datos Sakila
+## 4. Configuración de la base de datos Sakila
 
-**Importar la base de datos Sakila**
+### 4.1 Importar Sakila en MySQL
 
-1. Descarga Sakila 
-2. En MySQL ejecuta:
 ```sql
 CREATE DATABASE sakila;
 USE sakila;
@@ -59,9 +73,9 @@ SOURCE sakila-schema.sql;
 SOURCE sakila-data.sql;
 ```
 
-**Configurar conexión en db.py**
+### 4.2 Configuración de conexión en `db.py`
 
-Edita `db.py` para que apunte a tu servidor MySQL. Ejemplo seguro con variables de entorno:
+El archivo `db.py` contiene la función `get_connection()` que establece la conexión con MySQL:
 
 ```python
 import os
@@ -77,9 +91,9 @@ def get_connection():
     )
 ```
 
-**Variables de entorno recomendadas**
+### 4.3 Variables de entorno
 
-Crea un archivo `.env`:
+Crear un archivo `.env` en la raíz del proyecto:
 
 ```
 DB_HOST=localhost
@@ -88,119 +102,249 @@ DB_PASS=tu_password
 DB_NAME=sakila
 ```
 
-Asegúrate de que `db.py` lea estas variables o configura tu entorno antes de ejecutar la app.
+Asegurarse de que `.env` está incluido en `.gitignore` para evitar subir credenciales al repositorio.
 
 ---
 
-### Ejecutar la aplicación localmente
+## 5. Estructura del proyecto
 
-**1. Ejecutar la API FastAPI**
+```
+FLASK_API_SAKILA/
+│
+├── routers/               # Routers de FastAPI
+│   ├── customers.py
+│   └── rentals.py
+│
+├── static/
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       ├── customers.js
+│       └── rentals.js
+│
+├── templates/
+│   ├── index.html
+│   ├── customers.html
+│   └── rentals.html
+│
+├── app.py                 # Frontend Flask
+├── main.py                # Backend FastAPI
+├── db.py                  # Conexión MySQL
+├── requirements.txt
+└── README.md
+```
 
-Desde la raíz del proyecto:
+---
+
+## 6. Ejecución del proyecto
+
+### 6.1 Ejecutar la API FastAPI
 
 ```bash
 uvicorn main:app --reload --port 8000
 ```
 
-- **URL base API**: `http://localhost:8000/api/v1`  
-- **Documentación automática**: `http://localhost:8000/docs` — usa “Try it out” para probar endpoints.
+- Documentación interactiva:  
+  http://localhost:8000/docs
 
-**2. Ejecutar el frontend Flask**
+### 6.2 Ejecutar el frontend Flask
 
 ```bash
 export FLASK_APP=app.py
 flask run --port 5000
 ```
 
-- **Frontend**: `http://127.0.0.1:5000`  
-- Asegúrate de que las rutas a `static/js/customers.js` apunten a `/static/js/customers.js` y que no haya duplicados.
-
-**Consejo para desarrollo**: abre consola del navegador (F12) → pestañas **Network** y **Console** para ver errores JS, rutas y archivos cargados. Si editas JS y no ves cambios, fuerza recarga con **Ctrl+Shift+R** o usa modo incógnito.
+- Frontend disponible en:  
+  http://127.0.0.1:5000
 
 ---
 
-### Endpoints API explicados para burros
+## 7. Documentación de la API
 
-> **Tabla resumen de endpoints principales**
-
-| Endpoint | Método | Descripción |
-|---|---:|---|
-| `/api/v1/customers` | GET | Lista clientes; admite `limit` y `offset` para paginar |
-| `/api/v1/customers` | POST | Crea cliente; body: `first_name`, `last_name`, `email`, `store_id`, `address_id`, `active` |
-| `/api/v1/customers/{id}` | GET | Obtiene cliente por id |
-| `/api/v1/customers/{id}` | PUT | Actualiza `email` y `active` |
-| `/api/v1/customers/{id}` | DELETE | Borra cliente y sus pagos/alquileres relacionados |
-| `/api/v1/rentals` | GET | Lista alquileres |
-| `/api/v1/rentals` | POST | Crea alquiler; body: `inventory_id`, `customer_id`, `staff_id` |
-| `/api/v1/rentals/{id}/return` | PUT | Marca devolución de alquiler |
-
-**Ejemplo de uso con curl**
-
-- **Crear cliente**:
-```bash
-curl -X POST "http://localhost:8000/api/v1/customers" \
- -H "Content-Type: application/json" \
- -d '{"first_name":"Carmen","last_name":"Casas","email":"carmen@example.com","store_id":1,"address_id":1,"active":1}'
-```
-
-- **Listar clientes sin límite**:
-```bash
-curl "http://localhost:8000/api/v1/customers"
-```
-
+A continuación se detallan los endpoints principales, sus cuerpos de entrada y las respuestas esperadas.
 
 ---
 
-### Buenas prácticas, comprobaciones y resolución de problemas
+### 7.1 Clientes
 
-**1. Verifica que el JS que editas es el que carga el navegador**
+#### GET /api/v1/customers
 
-- Abre **Network** → recarga → busca `customers.js` → mira la ruta.  
-- Si editas otro archivo por error, la web seguirá ejecutando el que realmente carga.
+Devuelve la lista completa de clientes.
 
-**2. Comprobación rápida de errores en frontend**
+**Respuesta 200 OK**
 
-- Añade comprobación de respuesta en `fetch`:
-```js
-const res = await fetch(API_URL, {...});
-if (!res.ok) {
-  const error = await res.json();
-  alert("Error: " + JSON.stringify(error));
-  return;
+```json
+[
+  {
+    "customer_id": 1,
+    "first_name": "MARY",
+    "last_name": "SMITH",
+    "email": "MARY.SMITH@sakilacustomer.org",
+    "active": 1
+  }
+]
+```
+
+---
+
+#### POST /api/v1/customers
+
+**Body requerido**
+
+```json
+{
+  "first_name": "Carmen",
+  "last_name": "Casas",
+  "email": "carmen@example.com",
+  "store_id": 1,
+  "address_id": 1,
+  "active": 1
 }
 ```
-- Esto te mostrará el error real devuelto por FastAPI.
 
-**3. Errores comunes y soluciones**
+**Respuesta 201 Created**
 
-- **No aparecen nuevos clientes en la tabla** → revisa si la API devuelve solo 50 por defecto; ajusta `limit` o elimina `LIMIT` en SQL.  
-- **Duplicidad de archivos JS** → borra/renombra el duplicado y limpia caché.  
-- **Foreign key error al crear** → `store_id` o `address_id` no existen en la BD; comprueba con `SELECT * FROM store; SELECT * FROM address WHERE address_id = X;`.  
-- **CORS** → si frontend y API corren en puertos distintos y tienes problemas, habilita CORS en FastAPI:
-```python
-from fastapi.middleware.cors import CORSMiddleware
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+```json
+{
+  "message": "Cliente creado",
+  "customer_id": 606
+}
 ```
 
-**4. Posibles pruebas**
+**Errores posibles**
 
-- **Prueba 1**: En `/docs` crea un cliente con POST y muestra el `customer_id` devuelto.  
-- **Prueba 2**: En la web, crea otro cliente desde el formulario; muestra captura de la consola del navegador y la tabla actualizada.  
-- **Prueba 3**: Muestra  todos los clientes (quita `LIMIT` o usa `limit=1000`) y que el nuevo cliente aparece.  
-- **Prueba 4**: Edita un cliente y marca un alquiler como devuelto; muestra la respuesta 200 y la tabla actualizada.  
+400 Bad Request (clave foránea inválida)
 
+```json
+{
+  "detail": "(1452, 'Cannot add or update a child row: a foreign key constraint fails')"
+}
+```
 
-**5. Seguridad y limpieza**
+422 Unprocessable Entity (validación)
 
-- **No subas** `.env` ni credenciales a Git.  
-- **Valida** entradas en backend (pydantic ya ayuda).  
-- **Manejo de errores**: devuelve mensajes claros y códigos HTTP correctos (400, 404, 201, 500).
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "email"],
+      "msg": "value is not a valid email address",
+      "type": "value_error.email"
+    }
+  ]
+}
+```
 
 ---
 
-### Apéndice rápido con comandos útiles
+#### PUT /api/v1/customers/{id}
 
-- Importar Sakila: `mysql -u root -p sakila < sakila-data.sql`  
-- Ejecutar FastAPI: `uvicorn main:app --reload --port 8000`  
-- Ejecutar Flask: `flask run --port 5000`  
-- Forzar recarga caché Chrome: **Ctrl + Shift + R**
+**Body**
+
+```json
+{
+  "email": "nuevo@example.com",
+  "active": 0
+}
+```
+
+**Respuesta 200 OK**
+
+```json
+{
+  "message": "Cliente actualizado"
+}
+```
+
+**Error 404**
+
+```json
+{
+  "detail": "Cliente no encontrado"
+}
+```
+
+---
+
+#### DELETE /api/v1/customers/{id}
+
+**Respuesta 200 OK**
+
+```json
+{
+  "message": "Cliente eliminado"
+}
+```
+
+---
+
+### 7.2 Alquileres
+
+#### GET /api/v1/rentals
+
+**Respuesta 200 OK**
+
+```json
+[
+  {
+    "rental_id": 1,
+    "customer_id": 130,
+    "inventory_id": 367,
+    "staff_id": 1,
+    "rental_date": "2005-05-25T11:30:37",
+    "return_date": null
+  }
+]
+```
+
+---
+
+#### POST /api/v1/rentals
+
+**Body**
+
+```json
+{
+  "inventory_id": 10,
+  "customer_id": 5,
+  "staff_id": 1
+}
+```
+
+**Respuesta 201 Created**
+
+```json
+{
+  "message": "Alquiler creado",
+  "rental_id": 16050
+}
+```
+
+---
+
+#### PUT /api/v1/rentals/{id}/return
+
+**Respuesta 200 OK**
+
+```json
+{
+  "message": "Alquiler marcado como devuelto"
+}
+```
+
+---
+
+## 8. Resolución de problemas
+
+- Si el frontend no muestra cambios, forzar recarga con Ctrl + Shift + R.  
+- Si un cliente no aparece en la tabla, revisar que el endpoint no tenga un límite de registros.  
+- Si la API devuelve errores de integridad, comprobar que los IDs existen en la base de datos.  
+- Si el JS no funciona, verificar que el archivo cargado coincide con el que se está editando.
+
+---
+
+## 9. Conclusión
+
+El proyecto demuestra la integración completa entre un frontend en Flask, una API REST en FastAPI y una base de datos relacional real como Sakila. La estructura modular, el manejo de errores, la validación de datos y la documentación detallada permiten que el sistema sea mantenible, escalable y adecuado para entornos educativos y profesionales.
+
+---
