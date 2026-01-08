@@ -1,6 +1,4 @@
-Aquí tienes un **README completamente profesional**, sin emoticonos, con estructura clara, lenguaje formal y adecuado para una entrega académica de máxima calidad. Está redactado para que cualquier evaluador pueda entender el proyecto en profundidad y valorar tu trabajo con la máxima nota.
 
----
 
 # FLASK_API_SAKILA  
 Aplicación full‑stack basada en Flask (frontend) y FastAPI (backend), diseñada para gestionar clientes y alquileres utilizando la base de datos Sakila. El proyecto integra una API REST completa, un frontend funcional y una conexión directa con MySQL.
